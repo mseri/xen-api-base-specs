@@ -2,19 +2,20 @@
 %define debug_package %{nil}
 
 Name:           ocaml-typerep
-Version:        112.35.00
-Release:        2%{?dist}
+Version:        113.33.03
+Release:        1%{?dist}
 Summary:        Runtime types for OCaml.
 
 Group:          Development/Libraries
 License:        Apache Software License 2.0
 URL:            https://github.com/janestreet/typerep
-Source0:        https://ocaml.janestreet.com/ocaml-core/112.35/files/typerep-%{version}.tar.gz
+Source0:        https://ocaml.janestreet.com/ocaml-core/113.33/files/typerep-%{version}.tar.gz
 ExcludeArch:    sparc64 s390 s390x
 
 BuildRequires:  ocaml >= 4.00.1
 BuildRequires:  ocaml-findlib-devel
 BuildRequires:  ocaml-camlp4-devel
+BuildRequires:  ocaml-js-build-tools-devel
 BuildRequires:  ocaml-ocamldoc
 BuildRequires:  ocaml-bin-prot >= 109.53.02
 BuildRequires:  ocaml-sexplib >= 109.55.02
@@ -46,60 +47,80 @@ developing applications that use %{name}.
 %setup -q -n typerep-%{version}
 
 %build
-ocaml setup.ml -configure --prefix %{_prefix} \
-      --libdir %{_libdir} \
-      --libexecdir %{_libexecdir} \
-      --exec-prefix %{_exec_prefix} \
-      --bindir %{_bindir} \
-      --sbindir %{_sbindir} \
-      --mandir %{_mandir} \
-      --datadir %{_datadir} \
-      --localstatedir %{_localstatedir} \
-      --sharedstatedir %{_sharedstatedir}
-ocaml setup.ml -build
-
+make
 
 %check
-ocaml setup.ml -test
-
+make test
 
 %install
-rm -rf $RPM_BUILD_ROOT
-export DESTDIR=$RPM_BUILD_ROOT
-export OCAMLFIND_DESTDIR=$RPM_BUILD_ROOT%{_libdir}/ocaml
-mkdir -p $OCAMLFIND_DESTDIR $OCAMLFIND_DESTDIR/stublibs
-ocaml setup.ml -install
+%__install -D META                                %{buildroot}/%{_libdir}/ocaml/typerep/META
+%__install -D _build/lib/typerep_lib.cmx          %{buildroot}/%{_libdir}/ocaml/typerep/typerep_lib.cmx
+%__install -D _build/lib/typerep_lib.cmx          %{buildroot}/%{_libdir}/ocaml/typerep/typerep_lib.cmx
+%__install -D _build/lib/make_typename.annot      %{buildroot}/%{_libdir}/ocaml/typerep/make_typename.annot
+%__install -D _build/lib/make_typename.cmt        %{buildroot}/%{_libdir}/ocaml/typerep/make_typename.cmt
+%__install -D _build/lib/make_typename.cmti       %{buildroot}/%{_libdir}/ocaml/typerep/make_typename.cmti
+%__install -D _build/lib/named_intf.annot         %{buildroot}/%{_libdir}/ocaml/typerep/named_intf.annot
+%__install -D _build/lib/named_intf.cmt           %{buildroot}/%{_libdir}/ocaml/typerep/named_intf.cmt
+%__install -D _build/lib/std.annot                %{buildroot}/%{_libdir}/ocaml/typerep/std.annot
+%__install -D _build/lib/std.cmt                  %{buildroot}/%{_libdir}/ocaml/typerep/std.cmt
+%__install -D _build/lib/std_internal.annot       %{buildroot}/%{_libdir}/ocaml/typerep/std_internal.annot
+%__install -D _build/lib/std_internal.cmt         %{buildroot}/%{_libdir}/ocaml/typerep/std_internal.cmt
+%__install -D _build/lib/std_internal.cmti        %{buildroot}/%{_libdir}/ocaml/typerep/std_internal.cmti
+%__install -D _build/lib/type_abstract.annot      %{buildroot}/%{_libdir}/ocaml/typerep/type_abstract.annot
+%__install -D _build/lib/type_abstract.cmt        %{buildroot}/%{_libdir}/ocaml/typerep/type_abstract.cmt
+%__install -D _build/lib/type_abstract.cmti       %{buildroot}/%{_libdir}/ocaml/typerep/type_abstract.cmti
+%__install -D _build/lib/type_equal.annot         %{buildroot}/%{_libdir}/ocaml/typerep/type_equal.annot
+%__install -D _build/lib/type_equal.cmt           %{buildroot}/%{_libdir}/ocaml/typerep/type_equal.cmt
+%__install -D _build/lib/type_equal.cmti          %{buildroot}/%{_libdir}/ocaml/typerep/type_equal.cmti
+%__install -D _build/lib/type_generic.annot       %{buildroot}/%{_libdir}/ocaml/typerep/type_generic.annot
+%__install -D _build/lib/type_generic.cmt         %{buildroot}/%{_libdir}/ocaml/typerep/type_generic.cmt
+%__install -D _build/lib/type_generic.cmti        %{buildroot}/%{_libdir}/ocaml/typerep/type_generic.cmti
+%__install -D _build/lib/type_generic_intf.annot  %{buildroot}/%{_libdir}/ocaml/typerep/type_generic_intf.annot
+%__install -D _build/lib/type_generic_intf.cmt    %{buildroot}/%{_libdir}/ocaml/typerep/type_generic_intf.cmt
+%__install -D _build/lib/typename.annot           %{buildroot}/%{_libdir}/ocaml/typerep/typename.annot
+%__install -D _build/lib/typename.cmt             %{buildroot}/%{_libdir}/ocaml/typerep/typename.cmt
+%__install -D _build/lib/typename.cmti            %{buildroot}/%{_libdir}/ocaml/typerep/typename.cmti
+%__install -D _build/lib/typerep_obj.annot        %{buildroot}/%{_libdir}/ocaml/typerep/typerep_obj.annot
+%__install -D _build/lib/typerep_obj.cmt          %{buildroot}/%{_libdir}/ocaml/typerep/typerep_obj.cmt
+%__install -D _build/lib/typerep_obj.cmti         %{buildroot}/%{_libdir}/ocaml/typerep/typerep_obj.cmti
+%__install -D _build/lib/typerepable.annot        %{buildroot}/%{_libdir}/ocaml/typerep/typerepable.annot
+%__install -D _build/lib/typerepable.cmt          %{buildroot}/%{_libdir}/ocaml/typerep/typerepable.cmt
+%__install -D _build/lib/variant_and_record_intf.annot %{buildroot}/%{_libdir}/ocaml/typerep/variant_and_record_intf.annot
+%__install -D _build/lib/variant_and_record_intf.cmt %{buildroot}/%{_libdir}/ocaml/typerep/variant_and_record_intf.cmt
+%__install -D _build/lib/typerep_lib.cmxs         %{buildroot}/%{_libdir}/ocaml/typerep/typerep_lib.cmxs
+%__install -D _build/lib/typerep_lib.cmi          %{buildroot}/%{_libdir}/ocaml/typerep/typerep_lib.cmi
+%__install -D _build/lib/typerep_lib.cmt          %{buildroot}/%{_libdir}/ocaml/typerep/typerep_lib.cmt
+%__install -D _build/lib/typerep_lib.a            %{buildroot}/%{_libdir}/ocaml/typerep/typerep_lib.a
+%__install -D _build/lib/typerep_lib.cmxa         %{buildroot}/%{_libdir}/ocaml/typerep/typerep_lib.cmxa
+%__install -D _build/lib/typerep_lib.cma          %{buildroot}/%{_libdir}/ocaml/typerep/typerep_lib.cma
+%__install -D _build/lib/typerep_lib.cmi          %{buildroot}/%{_libdir}/ocaml/typerep/typerep_lib.cmi
+%__install -D _build/lib/typerep_lib.cmt          %{buildroot}/%{_libdir}/ocaml/typerep/typerep_lib.cmt
+
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+make clean
 
 
 %files
-%defattr(-,root,root,-)
-%doc LICENSE.txt  THIRD-PARTY.txt INRIA-DISCLAIMER.txt
-%{_libdir}/ocaml/typerep_lib
-%if %opt
-%exclude %{_libdir}/ocaml/typerep_lib/*.a
-%exclude %{_libdir}/ocaml/typerep_lib/*.cmxa
-%endif
-%exclude %{_libdir}/ocaml/typerep_lib/*.ml
-%exclude %{_libdir}/ocaml/typerep_lib/*.mli
-%exclude %{_libdir}/ocaml/typerep_lib/*.annot
-%exclude %{_libdir}/ocaml/typerep_lib/*.cmt
-%exclude %{_libdir}/ocaml/typerep_lib/*.cmti
+%doc LICENSE.txt
+%{_libdir}/ocaml/typerep
+%exclude %{_libdir}/ocaml/typerep/*.a
+%exclude %{_libdir}/ocaml/typerep/*.cmxa
+%exclude %{_libdir}/ocaml/typerep/*.cmxs
+%exclude %{_libdir}/ocaml/typerep/*.annot
+%exclude %{_libdir}/ocaml/typerep/*.cmt
+%exclude %{_libdir}/ocaml/typerep/*.cmti
 
 
 %files devel
-%defattr(-,root,root,-)
-%doc LICENSE.txt  THIRD-PARTY.txt INRIA-DISCLAIMER.txt
-%if %opt
-%{_libdir}/ocaml/typerep_lib/*.a
-%{_libdir}/ocaml/typerep_lib/*.cmxa
-%endif
-%{_libdir}/ocaml/typerep_lib/*.ml
-%{_libdir}/ocaml/typerep_lib/*.mli
+%{_libdir}/ocaml/typerep/*.a
+%{_libdir}/ocaml/typerep/*.cmxa
+%{_libdir}/ocaml/typerep/*.cmxs
 
 %changelog
+* Fri Oct 28 2016 Marcello Seri <marcello.seri@citrix.com> - 113.33.03-1
+- Update to 113.33.03
+
 * Wed Jul 27 2016 Euan Harris <euan.harris@citrix.com> - 112.35.00-2
 - Remove *.cmt, *.cmti and *.annot
 
