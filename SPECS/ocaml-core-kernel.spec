@@ -30,6 +30,7 @@ BuildRequires:  ocaml-sexplib-devel
 BuildRequires:  ocaml-typerep-devel
 BuildRequires:  ocaml-variantslib-devel
 BuildRequires:  ocaml-custom-printf-devel
+BuildRequires:  ocaml-result-devel
 BuildRequires:  chrpath
 
 %define _use_internal_dependency_generator 0
