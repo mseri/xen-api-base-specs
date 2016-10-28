@@ -2,14 +2,14 @@
 %define debug_package %{nil}
 
 Name:           ocaml-async-extra
-Version:        112.35.00
-Release:        2%{?dist}
+Version:        113.33.03
+Release:        1%{?dist}
 Summary:        Jane Street Capital's asynchronous execution library (core)
 
 Group:          Development/Libraries
 License:        Apache Software License 2.0
 URL:            https://github.com/janestreet/async_extra
-Source0:        https://ocaml.janestreet.com/ocaml-core/112.35/files/async_extra-%{version}.tar.gz
+Source0:        https://ocaml.janestreet.com/ocaml-core/113.33/files/async_extra-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 ExcludeArch:    sparc64 s390 s390x
 
@@ -114,6 +114,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/async_extra/*.mli
 
 %changelog
+* Fri Oct 28 2016 Marcello Seri <marcello.seri@citrix.com> - 113.33.03-1
+- Version bump
+
 * Wed Jul 27 2016 Euan Harris <euan.harris@citrix.com> - 112.35.00-2
 - Remove *.cmt, *.cmti and *.annot
 

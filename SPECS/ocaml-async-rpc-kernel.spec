@@ -2,14 +2,14 @@
 %define debug_package %{nil}
 
 Name:           ocaml-async-rpc-kernel
-Version:        112.35.00
-Release:        2%{?dist}
+Version:        113.33.03
+Release:        1%{?dist}
 Summary:        Platform-independent core of Async RPC library
 
 Group:          Development/Libraries
 License:        Apache Software License 2.0
 URL:            https://github.com/janestreet/async_rpc_kernel
-Source0:        https://ocaml.janestreet.com/ocaml-core/112.35/files/async_rpc_kernel-%{version}.tar.gz
+Source0:        https://ocaml.janestreet.com/ocaml-core/113.33/files/async_rpc_kernel-%{version}.tar.gz
 ExcludeArch:    sparc64 s390 s390x
 
 BuildRequires:  ocaml >= 4.00.1
@@ -114,6 +114,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/async_rpc_kernel/*.mli
 
 %changelog
+* Fri Oct 28 2016 Marcello Seri <marcello.seri@citrix.com> - 113.33.03-1
+- Version bump
+
 * Wed Jul 27 2016 Euan Harris <euan.harris@citrix.com> - 112.35.00-2
 - Remove *.cmt, *.cmti and *.annot
 

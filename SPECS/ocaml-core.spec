@@ -2,14 +2,14 @@
 %define debug_package %{nil}
 
 Name:           ocaml-core
-Version:        112.35.01
-Release:        2%{?dist}
+Version:        113.33.03
+Release:        1%{?dist}
 Summary:        System-independent part of Jane Street's Core.
 
 Group:          Development/Libraries
 License:        Apache Software License 2.0
 URL:            https://github.com/janestreet/core_kernel
-Source0:        https://ocaml.janestreet.com/ocaml-core/112.35/files/core-%{version}.tar.gz
+Source0:        https://ocaml.janestreet.com/ocaml-core/113.33/files/core-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 ExcludeArch:    sparc64 s390 s390x
 
@@ -135,6 +135,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/ocaml/core/*.mli
 
 %changelog
+* Fri Oct 28 2016 Marcello Seri <marcello.seri@citrix.com> - 113.33.03-1
+- Version bump
+
 * Wed Jul 27 2016 Euan Harris <euan.harris@citrix.com> - 112.35.01-2
 - Remove *.cmt, *.cmti and *.annot
 
