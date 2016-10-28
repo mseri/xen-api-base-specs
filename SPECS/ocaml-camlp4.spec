@@ -2,12 +2,12 @@
 
 # We're building from the 4.02 branch.  As the releases are
 # rather intermittent, build git versions instead.
-%global gitcommit 1e8965ead72e325c993e6c45b06e53e15e31f3e8
-%global shortcommit 1e8965ea
+%global gitcommit 4a1443ba45e64087e6eb77df092c87c83cba1216
+%global shortcommit 4a1443ba
 
 Name:          ocaml-camlp4
-Version:       4.02.2
-Release:       0.3.git%{shortcommit}%{?dist}
+Version:       4.02.3
+Release:       +7%{?dist}
 
 Summary:       Pre-Processor-Pretty-Printer for OCaml
 
@@ -120,6 +120,9 @@ make install \
 
 
 %changelog
+* Fri Oct 28 2016 Marcello Seri <marcello.seri@citrix.com> - 4.02+7
+- Remove *.cmt, *.cmti and *.annot
+
 * Wed Jul 27 2016 Euan Harris <euan.harris@citrix.com> - 4.02.2-0.3.git1e8965ea
 - Remove *.cmt, *.cmti and *.annot
 
