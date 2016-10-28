@@ -347,6 +347,8 @@ fi
 %{_libdir}/ocaml/caml
 %{_libdir}/ocaml/ocamlbuild
 %exclude %{_libdir}/ocaml/graphicsX11.mli
+%exclude %{_libdir}/ocaml/*.cmt
+%exclude %{_libdir}/ocaml/*.cmti
 
 
 %files runtime
@@ -405,6 +407,8 @@ fi
 %{_libdir}/ocaml/compiler-libs/*.cmx
 %{_libdir}/ocaml/compiler-libs/*.o
 %endif
+%exclude %{_libdir}/ocaml/compiler-libs/*.cmt
+%exclude %{_libdir}/ocaml/compiler-libs/*.cmti
 
 
 %changelog
