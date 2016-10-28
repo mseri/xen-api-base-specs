@@ -1,9 +1,10 @@
-From 5a2495689fcb11c4ed690008f4eab7dfc51d89ef Mon Sep 17 00:00:00 2001
+From d63e08ea4d073b2f5d5297eff396110d949c0352 Mon Sep 17 00:00:00 2001
 From: Michel Normand <normand@linux.vnet.ibm.com>
 Date: Tue, 18 Mar 2014 09:15:47 -0400
-Subject: [PATCH 08/19] Add support for ppc64le.
+Subject: [PATCH 08/20] Add support for ppc64le.
 
 Signed-off-by: Michel Normand <normand@linux.vnet.ibm.com>
+Signed-off-by: Marcello Seri <marcello.seri@citrix.com>
 ---
  asmcomp/power64le/arch.ml       |  88 ++++
  asmcomp/power64le/emit.mlp      | 981 ++++++++++++++++++++++++++++++++++++++++
@@ -1913,5 +1914,5 @@ index cb289fb..6157157 100755
                    aspp="$bytecc -c";;
    sparc,solaris)  as="${TOOLPREF}as"
 -- 
-2.3.1
+2.9.3
 

@@ -1,7 +1,7 @@
-From b6ae488dba765380975d71a03c5afdd02c4b5c58 Mon Sep 17 00:00:00 2001
+From 341e1f0892d1c7d39057e733b035fce54568d28b Mon Sep 17 00:00:00 2001
 From: Xavier Leroy <xavier.leroy@inria.fr>
 Date: Wed, 27 Aug 2014 09:58:33 +0000
-Subject: [PATCH 13/19] PR#6517: use ISO C99 types {,u}int{32,64}_t in
+Subject: [PATCH 13/20] PR#6517: use ISO C99 types {,u}int{32,64}_t in
  preference to our homegrown types {,u}int{32,64}.
 
 git-svn-id: http://caml.inria.fr/svn/ocaml/trunk@15131 f963ae5c-01c2-4b8c-9fe0-0dff7051ff02
@@ -15,6 +15,7 @@ commit b868c05ec91a7ee193010a421de768a3b1a80952 (SVN 15131).
 See also:
 
 http://caml.inria.fr/mantis/view.php?id=6517
+Signed-off-by: Marcello Seri <marcello.seri@citrix.com>
 ---
  asmrun/backtrace.c                  |   6 +-
  byterun/backtrace.c                 |   2 +-
@@ -1959,5 +1960,5 @@ index b8d02ea..6f3dc54 100644
  
    lseek(fd, (long) -TRAILER_SIZE, SEEK_END);
 -- 
-2.3.1
+2.9.3
 

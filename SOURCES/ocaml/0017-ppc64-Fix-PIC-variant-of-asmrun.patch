@@ -1,8 +1,9 @@
-From e549e91ccfeb0c8bb99aa4095cc2088ab443e7a3 Mon Sep 17 00:00:00 2001
+From 8f8713a113a218e7d7203c1575e8302f49821f41 Mon Sep 17 00:00:00 2001
 From: "Richard W.M. Jones" <rjones@redhat.com>
 Date: Mon, 29 Jun 2015 08:31:31 -0400
-Subject: [PATCH 17/19] ppc64: Fix PIC variant of asmrun.
+Subject: [PATCH 17/20] ppc64: Fix PIC variant of asmrun.
 
+Signed-off-by: Marcello Seri <marcello.seri@citrix.com>
 ---
  asmrun/Makefile | 3 +++
  1 file changed, 3 insertions(+)
@@ -22,5 +23,5 @@ index a63321e..4aa2fc9 100644
  	cp power64le-$(SYSTEM).o power64le.o
  
 -- 
-2.3.1
+2.9.3
 

@@ -1,11 +1,12 @@
-From bfcc9876923963085d23537ca444469362673889 Mon Sep 17 00:00:00 2001
+From 953b84dd9626f2be68f5cc8942478338250d560b Mon Sep 17 00:00:00 2001
 From: "Richard W.M. Jones" <rjones@redhat.com>
 Date: Tue, 29 May 2012 20:40:36 +0100
-Subject: [PATCH 04/19] ocamlbyteinfo, ocamlplugininfo: Useful utilities from
+Subject: [PATCH 04/20] ocamlbyteinfo, ocamlplugininfo: Useful utilities from
  Debian, sent upstream.
 
 See:
 http://git.debian.org/?p=pkg-ocaml-maint/packages/ocaml.git;a=tree;f=debian/ocamlbyteinfo;hb=HEAD
+Signed-off-by: Marcello Seri <marcello.seri@citrix.com>
 ---
  ocamlbyteinfo.ml   | 101 +++++++++++++++++++++++++++++++++++++++++++++++++
  ocamlplugininfo.ml | 109 +++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -236,5 +237,5 @@ index 0000000..e28800f
 +        header.units
 +    end
 -- 
-2.3.1
+2.9.3
 

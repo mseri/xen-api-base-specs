@@ -8,8 +8,8 @@
 %global natdynlink 1
 
 Name:           ocaml
-Version:        4.02.2
-Release:        6%{?dist}
+Version:        4.02.3
+Release:        1%{?dist}
 
 Summary:        OCaml compiler and programming environment
 
@@ -31,7 +31,7 @@ Source3:        http://caml.inria.fr/pub/distrib/ocaml-4.02/ocaml-4.02-refman.in
 #
 # https://git.fedorahosted.org/cgit/fedora-ocaml.git/
 #
-# Current branch: fedora-23-4.02
+# Current branch: fedora-24-4.02
 #
 # ALTERNATIVELY add a patch to the end of the list (leaving the
 # existing patches unchanged) adding a comment to note that it should
@@ -56,7 +56,7 @@ Patch0016:      0016-ppc64le-Fix-calling-convention-of-external-functions.patch
 Patch0017:      0017-ppc64-Fix-PIC-variant-of-asmrun.patch
 Patch0018:      0018-ppc64le-Fix-PIC-variant-of-asmrun.patch
 Patch0019:      0019-ppc64-ppc64le-Fix-behaviour-of-Int64.max_int-1-RHBZ-.patch
-Patch0020:      PR7220-fix-backtrace-memory-leak-in-systhreads.patch
+Patch0020:      0020-fix-PR-7003-and-a-few-other-bugs-caused-by-misuse-of.patch
 
 # Add BFD support so that ocamlobjinfo supports *.cmxs format (RHBZ#1113735).
 BuildRequires:  binutils-devel
@@ -408,6 +408,9 @@ fi
 
 
 %changelog
+* Fri Oct 28 2016 Marcello Seri <marcello.seri@citrix.com> - 4.02.3-1
+- Update to ocaml version 4.02.03
+
 * Tue Apr 12 2016 Rob Hoes <rob.hoes@citrix.com> - 4.02.2-6
 - Include patch to fix memory leak in OCaml runtime with backtraces+threads.
 

@@ -1,0 +1,89 @@
+From 27381a26db4604d9f37ab9f1a12f885d1dbd278a Mon Sep 17 00:00:00 2001
+From: Damien Doligez <damien.doligez-inria.fr>
+Date: Mon, 19 Oct 2015 15:47:33 +0000
+Subject: [PATCH 20/20] fix PR#7003 and a few other bugs caused by misuse of
+ Int_val
+
+git-svn-id: http://caml.inria.fr/svn/ocaml/trunk@16525 f963ae5c-01c2-4b8c-9fe0-0dff7051ff02
+(cherry picked from commit 659615c7b100a89eafe6253e7a5b9d84d0e8df74)
+Signed-off-by: Marcello Seri <marcello.seri@citrix.com>
+---
+ Changes          | 2 ++
+ byterun/alloc.c  | 4 ++--
+ byterun/intern.c | 2 +-
+ byterun/str.c    | 4 ++--
+ 4 files changed, 7 insertions(+), 5 deletions(-)
+
+diff --git a/Changes b/Changes
+index 3587d44..9649e1a 100644
+--- a/Changes
++++ b/Changes
+@@ -2,6 +2,8 @@ OCaml 4.02.3:
+ -------------
+ 
+ Bug fixes:
++- PR#7003: String.sub causes segmentation fault
++  (Damien Doligez, report by Radek Micek)
+ - PR#6908: Top-level custom printing for GADTs: interface change in 4.02.2
+   (Grégoire Henry, report by Jeremy Yallop)
+ - PR#6919: corrupted final_table
+diff --git a/byterun/alloc.c b/byterun/alloc.c
+index b421cac..3d7dfc4 100644
+--- a/byterun/alloc.c
++++ b/byterun/alloc.c
+@@ -147,7 +147,7 @@ CAMLexport int caml_convert_flag_list(value list, int *flags)
+ 
+ CAMLprim value caml_alloc_dummy(value size)
+ {
+-  mlsize_t wosize = Int_val(size);
++  mlsize_t wosize = Long_val(size);
+ 
+   if (wosize == 0) return Atom(0);
+   return caml_alloc (wosize, 0);
+@@ -161,7 +161,7 @@ CAMLprim value caml_alloc_dummy_function(value size,value arity)
+ 
+ CAMLprim value caml_alloc_dummy_float (value size)
+ {
+-  mlsize_t wosize = Int_val(size) * Double_wosize;
++  mlsize_t wosize = Long_val(size) * Double_wosize;
+ 
+   if (wosize == 0) return Atom(0);
+   return caml_alloc (wosize, 0);
+diff --git a/byterun/intern.c b/byterun/intern.c
+index 6f2d49f..4ddc8d0 100644
+--- a/byterun/intern.c
++++ b/byterun/intern.c
+@@ -287,7 +287,7 @@ static void intern_rec(value *dest)
+   case OFreshOID:
+     /* Refresh the object ID */
+     /* but do not do it for predefined exception slots */
+-    if (Int_val(Field((value)dest, 1)) >= 0)
++    if (Long_val(Field((value)dest, 1)) >= 0)
+       caml_set_oo_id((value)dest);
+     /* Pop item and iterate */
+     sp--;
+diff --git a/byterun/str.c b/byterun/str.c
+index d88c3d2..5bc4e0a 100644
+--- a/byterun/str.c
++++ b/byterun/str.c
+@@ -266,7 +266,7 @@ CAMLprim value caml_string_greaterequal(value s1, value s2)
+ CAMLprim value caml_blit_string(value s1, value ofs1, value s2, value ofs2,
+                                 value n)
+ {
+-  memmove(&Byte(s2, Long_val(ofs2)), &Byte(s1, Long_val(ofs1)), Int_val(n));
++  memmove(&Byte(s2, Long_val(ofs2)), &Byte(s1, Long_val(ofs1)), Long_val(n));
+   return Val_unit;
+ }
+ 
+@@ -293,7 +293,7 @@ CAMLprim value caml_is_printable(value chr)
+ 
+ CAMLprim value caml_bitvect_test(value bv, value n)
+ {
+-  int pos = Int_val(n);
++  intnat pos = Long_val(n);
+   return Val_int(Byte_u(bv, pos >> 3) & (1 << (pos & 7)));
+ }
+ 
+-- 
+2.9.3
+

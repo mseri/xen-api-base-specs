@@ -1,5 +1,5 @@
 Name:		oasis
-Version:	0.4.5
+Version:	0.4.7
 Release:	1%{?dist}
 Summary:	Architecture for building OCaml libraries and applications
 
@@ -90,6 +90,9 @@ make install
 
 
 %changelog
+* Fri Oct 28 2016 Marcello Seri <marcello.seri@citrix.com> - 0.4.7-1
+- Update to 0.4.7
+
 * Thu Apr  2 2015 David Scott <dave.scott@citrix.com> - 0.4.5-1
 - Update to 0.4.5
 

@@ -1,7 +1,7 @@
-From 83b653b6b163018086c0d9d66d02feb5edeb44d1 Mon Sep 17 00:00:00 2001
+From d1b5848cac51fc63723cdecb857f520caa0b27a2 Mon Sep 17 00:00:00 2001
 From: "Richard W.M. Jones" <rjones@redhat.com>
 Date: Tue, 29 May 2012 20:47:07 +0100
-Subject: [PATCH 06/19] Add support for ppc64.
+Subject: [PATCH 06/20] Add support for ppc64.
 
 Note (1): This patch was rejected upstream because they don't have
 appropriate hardware for testing.
@@ -19,6 +19,8 @@ Includes fix for minor heap corruption because of unaligned minor heap
 register (RHBZ#826649).
 
 Includes updates for OCaml 4.01.0.
+
+Signed-off-by: Marcello Seri <marcello.seri@citrix.com>
 ---
  asmcomp/power64/arch.ml       |  88 ++++
  asmcomp/power64/emit.mlp      | 988 ++++++++++++++++++++++++++++++++++++++++++
@@ -2126,5 +2128,5 @@ index d006010..cb289fb 100755
                    aspp="$bytecc -c";;
    sparc,solaris)  as="${TOOLPREF}as"
 -- 
-2.3.1
+2.9.3
 
