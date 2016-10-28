@@ -49,6 +49,7 @@ make
 export OCAMLFIND_DESTDIR=%{buildroot}/%{_libdir}/ocaml
 mkdir -p $OCAMLFIND_DESTDIR
 make install
+find _build
 
 
 %files
@@ -57,16 +58,17 @@ make install
 %{_libdir}/ocaml/plugin-loader/META
 %{_libdir}/ocaml/plugin-loader/*.cma
 %{_libdir}/ocaml/plugin-loader/*.cmi
+%exclude %{_libdir}/ocaml/plugin-loader/*.annot
+%exclude %{_libdir}/ocaml/plugin-loader/*.cmt
+%exclude %{_libdir}/ocaml/plugin-loader/*.cmti
 
 %{_libdir}/ocaml/oasis/META
 %{_libdir}/ocaml/oasis/*.cma
 %{_libdir}/ocaml/oasis/*.cmi
 %{_libdir}/ocaml/oasis/*.mli
-
-%{_libdir}/ocaml/userconf/META
-%{_libdir}/ocaml/userconf/*.cma
-%{_libdir}/ocaml/userconf/*.cmi
-
+%exclude %{_libdir}/ocaml/oasis/*.annot
+%exclude %{_libdir}/ocaml/oasis/*.cmt
+%exclude %{_libdir}/ocaml/oasis/*.cmti
 
 
 %files devel
@@ -81,12 +83,6 @@ make install
 %{_libdir}/ocaml/oasis/*.cmxa
 %exclude %{_libdir}/ocaml/oasis/*.cmxs
 %exclude %{_libdir}/ocaml/oasis/*.ml
-
-%{_libdir}/ocaml/userconf/*.a
-%{_libdir}/ocaml/userconf/*.cmx
-%{_libdir}/ocaml/userconf/*.cmxa
-%exclude %{_libdir}/ocaml/userconf/*.cmxs
-%exclude %{_libdir}/ocaml/userconf/*.ml
 
 
 %changelog
